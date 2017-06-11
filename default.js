@@ -38,7 +38,11 @@
       for (let j = y - 1; j <= y + 1; j++) {
         if (i < 0 || i >= COLUMNS) continue;
         if (j < 0 || j >= COLUMNS) continue;
-        if (i === j) continue;
+        if (maze_version) {
+          if (i === y) continue;
+        } else {
+          if (i === x && j === y) continue;
+        }
         count += map[i][j];
       }
     }
@@ -109,8 +113,9 @@
   });
 
   canvas.addEventListener('click', function(event) {
-    let x = event.offsetX, y = event.offsetY;
-    map[Math.floor(x / BLOCK_SIZE_PX)][Math.floor(y / BLOCK_SIZE_PX)] ^= 1;
+    let x = Math.floor(event.offsetX / BLOCK_SIZE_PX),
+        y = Math.floor(event.offsetY / BLOCK_SIZE_PX);
+    map[x][y] ^= 1;
     draw();
   }, false);
 
