@@ -5,6 +5,7 @@
   const BLOCK_SIZE_PX = 5;
   const COLUMNS = 100;
 
+  let maze_version = false;
   let evolve_rate_per_draw = 1;
 
   function $() {
@@ -31,7 +32,7 @@
     }
   }
 
-  function neighbours(x, y) {
+  function neighbours(map, x, y) {
     let count = 0;
     for (let i = x - 1; i <= x + 1; i++) {
       for (let j = y - 1; j <= y + 1; j++) {
@@ -45,22 +46,33 @@
   }
 
   function evolve() {
+    let new_map =
+        maze_version
+          ? map
+          : new Array(COLUMNS).fill(0).map(row => new Array(COLUMNS).fill(0));
+
     for (let i = 0; i < COLUMNS; i++) {
       for (let j = 0; j < COLUMNS; j++) {
-        let k = neighbours(i, j);
+        let k = neighbours(map, i, j);
         if (map[i][j] === 0) {
           // was dead
           if (k === 3) {
-            map[i][j] = 1;
+            new_map[i][j] = 1;
+          } else {
+            new_map[i][j] = 0;
           }
         } else {
           // was alive
           if (k < 2 || k > 3) {
-            map[i][j] = 0;
+            new_map[i][j] = 0;
+          } else {
+            new_map[i][j] = 1;
           }
         }
       }
     }
+
+    map = new_map;
   }
 
   [0, 1, 10, 100].forEach(function(times) {
@@ -81,7 +93,14 @@
     } else {
       console.error('data corrupted, skip loading');
     }
-  })
+  });
+
+  let $maze = $('#maze');
+  $maze.textContent = maze_version ? 'Maze -> Normal' : 'Normal -> Maze';
+  $maze.addEventListener('click', function() {
+    maze_version ^= 1;
+    $maze.textContent = maze_version ? 'Maze -> Normal' : 'Normal -> Maze';
+  });
 
   canvas.addEventListener('click', function(event) {
     let x = event.offsetX, y = event.offsetY;
