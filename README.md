@@ -2,6 +2,11 @@
 
 [Open in browser](https://ranmocy.github.io/life/)
 
+## Usage
+
+1. Click the map to toggle state.
+1. Use button to control speed and save/load.
+
 ## Rules
 
 * Any live cell with fewer than two live neighbours dies, as if caused by underpopulation.
