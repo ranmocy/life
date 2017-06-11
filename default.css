@@ -1,15 +1,17 @@
-body {
+html {
   height: 100vh;
   width: 100vw;
 }
 
+body {
+  width: 502px;
+  margin: 10px auto;
+}
+
 canvas {
   border: 1px solid #888;
-  margin: auto;
-  display: block;
 }
 
 #toolbox {
   margin: 10px auto;
-  width: 500px;
 }
