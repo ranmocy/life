@@ -60,18 +60,10 @@
         let k = neighbours(map, i, j);
         if (map[i][j] === 0) {
           // was dead
-          if (k === 3) {
-            new_map[i][j] = 1;
-          } else {
-            new_map[i][j] = 0;
-          }
+          new_map[i][j] = (k === 2) ? 1 : 0;
         } else {
           // was alive
-          if (k < 2 || k > 3) {
-            new_map[i][j] = 0;
-          } else {
-            new_map[i][j] = 1;
-          }
+          new_map[i][j] = (2 <= k && k <= 3) ? 1 : 0;
         }
       }
     }
