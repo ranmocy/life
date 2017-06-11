@@ -95,6 +95,12 @@
     }
   });
 
+  $('#random').addEventListener('click', function() {
+    for (let k = 0; k < 500; k++) {
+      map[Math.floor(Math.random() * COLUMNS)][Math.floor(Math.random() * COLUMNS)] ^= 1;
+    }
+  });
+
   let $maze = $('#maze');
   $maze.textContent = maze_version ? 'Maze -> Normal' : 'Normal -> Maze';
   $maze.addEventListener('click', function() {
