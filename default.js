@@ -5,7 +5,7 @@
   const BLOCK_SIZE_PX = 5;
   const COLUMNS = 100;
 
-  let maze_version = false;
+  let maze_version = true;
   let evolve_rate_per_draw = 1;
 
   function $() {
