@@ -89,9 +89,7 @@
           for (let j = y - 1; j <= y + 1; j++) {
             if (i < 0 || i >= COLUMNS) continue;
             if (j < 0 || j >= COLUMNS) continue;
-            if (maze_version) {
-              if (i === y) continue;
-            } else {
+            if (!maze_version) {
               if (i === x && j === y) continue;
             }
             count += map[i][j];
@@ -111,7 +109,7 @@
             let k = neighbours(map, i, j);
             if (map[i][j] === 0) {
               // was dead
-              new_map[i][j] = (k === 2) ? 1 : 0;
+              new_map[i][j] = (k === 3) ? 1 : 0;
             } else {
               // was alive
               new_map[i][j] = (2 <= k && k <= 3) ? 1 : 0;
